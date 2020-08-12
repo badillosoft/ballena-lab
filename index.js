@@ -1,5 +1,5 @@
-const mongo = require("./lib/mongo");
-const util = require("./lib/util");
+const mongo = require("./mongo");
+const util = require("./util");
 
 module.exports = {
     mongo,

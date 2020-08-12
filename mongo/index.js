@@ -1,6 +1,6 @@
 const mongodb = require("mongodb");
 
-const { moment } = require("./coreUtil");
+const { moment } = require("../util");
 
 const { MongoClient } = mongodb;
 
