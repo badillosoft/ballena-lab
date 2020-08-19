@@ -3,5 +3,7 @@ const util = require("./util");
 
 module.exports = {
     mongo,
-    util
+    ...mongo,
+    util,
+    ...util
 };
