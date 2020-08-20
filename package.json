@@ -1,6 +1,6 @@
 {
   "name": "@ballena/lab",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Ballena Container Utilities",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,8 @@
   "homepage": "https://github.com/badillosoft/ballena-lab#readme",
   "dependencies": {
     "mongodb": "^3.6.0",
-    "stripe": "^8.88.0"
+    "stripe": "^8.88.0",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {}
 }
