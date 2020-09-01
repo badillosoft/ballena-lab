@@ -243,6 +243,26 @@ const self = {
         });
 
         return await self.mongoQueryId(collection, _document._id);
+    },
+    async mongoDeleteOne(collection, id) {
+        if (!id) throw new Error(`MongoDeleteOneError: id is not valid`);
+
+        const document = await self.mongoQueryId(collection, id).catch(() => {
+            throw new Error(`MongoDeleteOneError: document with id ${id} does not exists`)
+        })
+
+        await self.mongoExecute(collection, {
+            statement: "bulkWrite",
+            operations: [
+                {
+                    deleteOne: {
+                        filter: { _id: id }
+                    }
+                }
+            ]
+        });
+
+        return document;
     }
 };
 
