@@ -1,4 +1,7 @@
+const fetch = require("node-fetch");
+
 module.exports = {
+    fetch,
     moment(date) {
         const now = new Date(date || new Date());
 
@@ -15,5 +18,27 @@ module.exports = {
             now.toISOString().slice(0, 10),
             now.toISOString().slice(11, 19),
         ];
-    }
+    },
+    async runApi(server, api, protocol = {}) {
+        const url = `${server.protocol}://${server.host}:${server.port}/${api}`;
+
+        const response = await fetch(url, {
+            method: "post",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(protocol)
+        });
+
+        if (!response.ok) {
+            const error = await response.text();
+            throw error.replace(/[\r\n]/g, "");
+        }
+
+        const { error, result } = await response.json();
+
+        if (error) throw error.replace(/[\r\n]/g, "");
+
+        return result;
+    },
 };

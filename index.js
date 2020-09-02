@@ -3,7 +3,10 @@ const util = require("./util");
 const stripe = require("stripe");
 const { v4: uuid } = require("uuid");
 
+const version = "v1.0.7";
+
 module.exports = {
+    version,
     mongo,
     ...mongo,
     util,
