@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 module.exports = {
     nodemailer,
-    sendEmail(to = "kuhnidev@gmail.com", subject = "Prueba de correo", text = "Hola Kuhni Dev", html = null) {
+    async sendEmail(to = "kuhnidev@gmail.com", subject = "Prueba de correo", text = "Hola Kuhni Dev", html = null) {
         const mailFrom = process.env.MAIL_FROM;
         const mailUser = process.env.MAIL_USER;
         const mailPassword = process.env.MAIL_PASSWORD;
