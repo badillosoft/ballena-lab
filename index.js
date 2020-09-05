@@ -3,7 +3,7 @@ const util = require("./util");
 const stripe = require("stripe");
 const { v4: uuid } = require("uuid");
 
-const version = "v1.0.10";
+const version = "v1.0.11";
 
 module.exports = {
     version,

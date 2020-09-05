@@ -1,16 +1,16 @@
 const crypto = require("crypto");
 
 module.exports = {
-    encrypt(text, password) {
+    encrypt(text, password, encode = "utf-8") {
         const cipher = crypto.createCipher("aes-256-cbc", password);
-        let crypted = cipher.update(text, "utf8", "hex");
+        let crypted = cipher.update(text, encode, "hex");
         crypted += cipher.final("hex");
         return crypted;
     },
-    decrypt(text, password) {
+    decrypt(text, password, encode = "utf-8") {
         const decipher = crypto.createDecipher("aes-256-cbc", password);
-        let decrypted = decipher.update(text, "hex", "utf8");
-        decrypted += decipher.final("utf8");
+        let decrypted = decipher.update(text, "hex", encode);
+        decrypted += decipher.final(encode);
         return decrypted;
     },
     encryptBinary(text, password) {
