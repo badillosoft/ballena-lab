@@ -1,5 +1,5 @@
 module.exports = {
-    searchTextQuery(field, text) {
+    normalize(text) {
         const normalize = (
             (text || "").toLowerCase()
                 .split(/[\s\n]+/)
@@ -11,10 +11,11 @@ module.exports = {
                 .replace(/ú|ü|ù|û/g, "u")
         );
 
-        const re = new RegExp(normalize, "i");
-
+        return new RegExp(normalize, "i");
+    },
+    searchTextQuery(field, text) {
         return {
-            [field]: { $regex: re }
+            [field]: { $regex: this.normalize(text) }
         };
     },
     orQuery(...queries) {

@@ -4,17 +4,9 @@ const { moment } = require("../util");
 
 const { MongoClient } = mongodb;
 
-const docs = {
-    mongodb: {
-        type: "package",
-        "url": "https://www.npmjs.com/package/mongodb",
-        "command": "npm install --save mongodb",
-        "example": "const mongodb = require('mongodb');"
-    }
-};
-
 const self = {
-    docs,
+    mongodb,
+    MongoClient,
     client: null,
     db: null,
     async mongoConnection(uri) {

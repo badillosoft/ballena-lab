@@ -1,7 +1,11 @@
 const fetch = require("node-fetch");
+const { v4: uuid } = require("uuid");
+const stripe = require("stripe");
 
 module.exports = {
+    stripe,
     fetch,
+    uuid,
     moment(date) {
         const now = new Date(date || new Date());
 
