@@ -95,8 +95,8 @@ const self = {
     async mongoQueryId(collection, _id) {
         return await self.mongoQueryOne(collection, { _id });
     },
-    async mongoId(prefix, digits = 3) {
-        const version = (await self.mongoQueryId("ballena.versions", prefix).catch(() => null)) || { _id: prefix };
+    async mongoId(prefix, digits = 3, collection = "ballena.versions") {
+        const version = (await self.mongoQueryId(collection, prefix).catch(() => null)) || { _id: prefix };
 
         version.count = (version.count || 0) + 1;
 
@@ -112,9 +112,30 @@ const self = {
 
         // console.log(version);
 
-        await self.mongoUpsertOne("ballena.versions", null, version);
+        await self.mongoUpsertOne(collection, null, version);
 
         return id;
+    },
+    async mongoFolio(prefix, digits = 3, collection = "ballena.versions") {
+        const version = (await self.mongoQueryId(collection, prefix).catch(() => null)) || { _id: prefix };
+
+        version.count = (version.count || 0) + 1;
+
+        const v = `${version.count}`;
+
+        const diff = (digits || 3) - v.length;
+
+        const fixVersion = diff > 0 ? `${`0`.repeat(diff)}${v}` : v;
+
+        const id = `${prefix}-${fixVersion}`;
+
+        version.lastId = id;
+
+        // console.log(version);
+
+        // await self.mongoUpsertOne(collection, null, version);
+
+        return { id, version };
     },
     async mongoInsertOne(collection, id, document) {
         document._id = id || document._id || document.id;
